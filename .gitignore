@@ -3,3 +3,5 @@
 data/eesi-names-mycopy.txt
 notebooks/*.php
 notebooks/*.jpg
+data/second-to-last-user.txt
+*.ipynb_checkpoints/

@@ -1,0 +1,5 @@
+*.swp
+*.pyc
+data/eesi-names-mycopy.txt
+notebooks/*.php
+notebooks/*.jpg

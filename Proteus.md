@@ -8,11 +8,11 @@ Proteus has two head nodes that you can use for compting. Think of the nodes as 
 
 ```bash
   # sshing into AMD servers 
-  ssh $USERNAME@proteusa01.urcf.drexel.edu
+  ssh USERNAME@proteusa01.urcf.drexel.edu
   # sshing into Intel servers 
-  ssh $USERNAME@proteusi01.urcf.drexel.edu
+  ssh USERNAME@proteusi01.urcf.drexel.edu
 ```
-where `$USERNAME` is your username for proteus. Note that in the shell, the `$` is used to denote a variable. For example, if my username was `greg`, I could use something like: 
+where `USERNAME` is your username for proteus. Note that in the shell, the `$` is used to denote a variable. For example, if my username was `greg`, I could use something like: 
 
 ```bash 
   USERNAME=greg
@@ -36,10 +36,18 @@ Proteus is using modules to setup the environment in the shell and the software 
 You can manully load each of the modules as you need them; however, it may make your life easier to add the following commands to your `~/.bashrc` file. 
 
 ```bash
-  module load python/2.7.6
+  module load python/2.7.7
   module load R/3.0.2
   module load matlab/R2013a
   module load ncbi-blast/gcc/64/2.2.29 
+```
+
+## Modules Installed for the Course
+
+Several modules have been installed specifically for this course. Some of these tools are `FastQC`, `BowTie`, `CD-Hit`, `Cufflinks`, `Trimmomatic`, `muscle`, `fasttree`, `infernal`, and `tophat` to name a few. However, before any of these tools can be used, we must add them to our path if we want to use them. We can acheive this by running or adding this line to our SGE submission script.
+
+```bash 
+  source /mnt/HA/groups/nsftuesGrp/bashrc
 ```
 
 # Simple Qsub and Scripts 
@@ -66,10 +74,14 @@ The outline for this script can be found on the [Proteus wiki](https://proteusma
   # want at least 6 GB of free memory
   #$ -l mem_free=6G
   # select the queue all.q, using hostgroup @intelhosts
-  #$ -q all.q@@intelhosts 
+  #$ -q all.q@@amdhosts 
 
-  module load python/2.7.6
-  python -c "print 'The task ID is $SGE_TASK_ID'""
+  . /etc/profile.d/modules.sh
+  module load shared
+  module load proteus
+  module load sge/univa
+
+  python -c "print 'Hello World'"
 ```
 
 ## Calling the Script
@@ -77,10 +89,10 @@ The outline for this script can be found on the [Proteus wiki](https://proteusma
 We can submit the previous script to the scheduler using: 
 
 ```bash
-  newgrp fixmeGrp
+  newgrp nsftuesGrp
   qsub simple-script.sh  
 ```
-at the shell. Note that the previous commands will produce an error since the project and group names were fictitious.
+at the shell. We need to switch to the `nsftuesGrp` group to be able to submit our jobs to the cluster. Note that the previous commands will produce an error since the project and group names were fictitious.
 
 ## Monitoring Progress
 
@@ -88,3 +100,71 @@ at the shell. Note that the previous commands will produce an error since the pr
   qstat
   qstat -f 
 ```
+
+## Using Scratch Space
+
+It is very likely that your projects will require that you submit your code to the cluster and the result is something such as an output file from you program. Regardless of what your program is written in (e.g., Bash, Python, Perl, Matlab, R, ...), you'll need to specify where the file is going to be written. Make sure that you write to the scratch space then copy/move the file to your local folder. For example, lets say I have a python script `my_fun.py` that runs a Monte Carlo like simulation on a file $/home/gcd34/data.txt$ (file does not actually exist! its just an example), and output the result to $/home/gcd34/output.txt$.  The *lazy*, and also incorrect way, is 
+
+```bash
+  #!/bin/bash
+  #$ -S /bin/bash
+  #$ -cwd
+  #$ -M fixme@drexel.edu
+  # -P fixmePrj
+  #$ -l h_rt=00:15:00
+  #$ -l h_vmem=8G
+  #$ -l mem_free=6G
+  #$ -q all.q@@amdhosts 
+
+  . /etc/profile.d/modules.sh
+  module load shared
+  module load proteus
+  module load sge/univa
+  
+  ##
+  # do some stuff here
+  ##
+  
+  python my_fun.py -i /home/gcd34/data.txt -o /home/gcd34/output.txt
+  
+  ##
+  # do some more stuff here
+  ##
+```
+
+Rather write the file to scratch then move the file to your local directory after everything is done! This can be accomplished with:
+
+
+```bash
+  #!/bin/bash
+  #$ -S /bin/bash
+  #$ -cwd
+  #$ -M fixme@drexel.edu
+  # -P fixmePrj
+  #$ -l h_rt=00:15:00
+  #$ -l h_vmem=8G
+  #$ -l mem_free=6G
+  #$ -q all.q@@amdhosts 
+
+  . /etc/profile.d/modules.sh
+  module load shared
+  module load proteus
+  module load sge/univa
+  
+  ##
+  # do some stuff here
+  ##
+  
+  python my_fun.py -i /home/gcd34/data.txt -o $TMP/output.txt
+  
+  ##
+  # do some more stuff here
+  ##
+  
+  ## finish up
+  cp $TMP/output.txt /home/gcd34/output.txt$
+```
+
+
+
+

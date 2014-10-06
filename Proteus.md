@@ -17,8 +17,14 @@ where `USERNAME` is your username for proteus. Note that in the shell, the `$` i
 ```bash 
   USERNAME=greg
   echo "My user name is $USERNAME" 
-  ssh $USERNAME@proteusi01.urcf.drexel.edu
+  ssh $USERNAME@proteusa01.urcf.drexel.edu
 ```
+
+# Transferring Files
+
+* [Filezilla](https://filezilla-project.org/)
+* [WinSCP](http://winscp.net/eng/index.php)
+* [Cyberduck](https://cyberduck.io/)
 
 # Using Modules 
 
@@ -41,6 +47,8 @@ You can manully load each of the modules as you need them; however, it may make 
   module load matlab/R2013a
   module load ncbi-blast/gcc/64/2.2.29 
 ```
+
+You can unload modules with `module unload <some modeule>`.
 
 ## Modules Installed for the Course
 
@@ -110,7 +118,7 @@ It is very likely that your projects will require that you submit your code to t
   #$ -S /bin/bash
   #$ -cwd
   #$ -M fixme@drexel.edu
-  # -P fixmePrj
+  # -P nsftuesPrj
   #$ -l h_rt=00:15:00
   #$ -l h_vmem=8G
   #$ -l mem_free=6G
@@ -140,7 +148,7 @@ Rather write the file to scratch then move the file to your local directory afte
   #$ -S /bin/bash
   #$ -cwd
   #$ -M fixme@drexel.edu
-  # -P fixmePrj
+  # -P nsftuesPrj
   #$ -l h_rt=00:15:00
   #$ -l h_vmem=8G
   #$ -l mem_free=6G
@@ -162,8 +170,10 @@ Rather write the file to scratch then move the file to your local directory afte
   ##
   
   ## finish up
-  cp $TMP/output.txt /home/gcd34/output.txt$
+  cp $TMP/output.txt /home/gcd34/output.txt
 ```
+
+Refer to this [link](http://gregoryditzler.wordpress.com/2014/09/17/performing-tasks-such-as-monte-carlo-simulations-on-a-cluster/) for a slightly more detailed Matlab example. 
 
 
 

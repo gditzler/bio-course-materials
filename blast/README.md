@@ -1,6 +1,6 @@
 # About 
 
-Command line Blast tutorial written by Yemin Lan (<yeminlan@gmail.com >).
+Command line Blast tutorial written by Yemin Lan (<yeminlan@gmail.com>).
 
 # Notes 
 

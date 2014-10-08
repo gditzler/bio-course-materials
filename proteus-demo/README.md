@@ -20,3 +20,19 @@ You need to make sure you change from your group to the courses group before you
   qsub submitter.sh
 ```
 
+Use the `qstat` command to check the status of the job. SGE produces two files, an error and output file, in the directory where the script was submitted into the queue. You can check the file contents for any errors or things that would have normally been dumped to the standard output. Check the `output/` folder for the contents of the Qiime output being executed in `submitter.sh` 
+
+```bash
+[gcd34@proteusi01 proteus-demo]$ ls -l output/
+total 20
+-rw-r--r-- 1 gcd34 rosenGrp   69 Oct  8 14:19 alpha_params.txt
+drwxr-xr-x 2 gcd34 rosenGrp  120 Oct  8 14:19 mapping_output
+drwxr-xr-x 8 gcd34 rosenGrp 4096 Oct  8 14:19 otus
+drwxr-xr-x 2 gcd34 rosenGrp   86 Oct  8 14:19 split_library_output
+drwxr-xr-x 4 gcd34 rosenGrp  106 Oct  8 14:19 wf_arare
+drwxr-xr-x 4 gcd34 rosenGrp 4096 Oct  8 14:19 wf_bdiv_even146
+drwxr-xr-x 5 gcd34 rosenGrp 4096 Oct  8 14:19 wf_jack
+drwxr-xr-x 3 gcd34 rosenGrp 4096 Oct  8 14:19 wf_taxa_summary
+```
+
+ 

@@ -11,6 +11,11 @@ This tutorial goes over how to use  Qiime  to process data from a high-throughpu
   mkdir output/
 ```
 
+You also need to setup your Qiime configuration (i.e., tell Qiime where otherr software and databases are located). So run
+```bash 
+  cp /mnt/HA/groups/nsftuesGrp/qiime_config ~/.qiime_config
+```
+
 
 # Submitting to the Proteus cluster
 

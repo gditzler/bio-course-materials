@@ -3,10 +3,10 @@
 #$ -cwd
 #$ -M gcd34@drexel.edu
 #$ -l h_rt=00:45:00
-#$ -P nsftuesGrp
+#$ -P nsftuesPrj
 #$ -l h_vmem=8G
 #$ -l mem_free=6G
-#$ -q all.q@@intelhosts 
+#$ -q all.q@@amdhosts 
 
 # boiler plate stuff here! set up the environment at we need to do our
 # computation
@@ -17,8 +17,10 @@ module load sge/univa
 module load gcc/4.8.1
 module load qiime/gcc/64/1.8.0
 
-data_fp=/home/gcd34/Git/bio-course-materials/proteus-demo/data/
-out_fp=/home/gcd34/Git/bio-course-materials/proteus-demo/output/
+###############################
+## Change this path!!!!
+data_fp=/home/gcd34/bio-course-materials/proteus-demo/data/
+out_fp=/home/gcd34/bio-course-materials/proteus-demo/output/
 
 # 1) check out mapping file 
 validate_mapping_file.py -m ${data_fp}/Fasting_Map.txt -o ${TMP}/mapping_output/ -v

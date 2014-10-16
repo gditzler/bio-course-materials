@@ -13,7 +13,7 @@ First, download the Git repo to you home folder on the login node of Proteus. Be
 Now that we have the code, you must edit `submitter.sh`. Use `nano` to edit the following
 
 * Change the email address in line 4 to be your Drexel email address (i.e., the username you would use to ssh into the cluster)
-* Change lines 22 and 23 from `/home/gcd34/bio-course-materials/...` to `/home/<your user name>/bio-course-materials/...` 
+* Change lines 22 and 23 from `/home/gcd34/bio-course-materials/proteus-demo/data` to `/home/<your user name>/bio-course-materials/proteus-demo/data`. Perform the same change for line 23 
 
 # What are we doing here?
 

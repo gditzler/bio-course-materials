@@ -43,7 +43,18 @@ You need to make sure you change from your group to the courses group before you
   qsub submitter.sh
 ```
 
-Use the `qstat` command to check the status of the job. SGE produces two files, an error and output file, in the directory where the script was submitted into the queue. You can check the file contents for any errors or things that would have normally been dumped to the standard output. Check the `output/` folder for the contents of the Qiime output being executed in `submitter.sh` 
+Use the `qstat` command to check the status of the job. SGE produces two files, an error and output file, in the directory where the script was submitted into the queue. Runnign `qstat` should give you something like 
+
+```bash 
+[gcd34@proteusi01 proteus-demo]$ qstat
+job-ID  prior   name       user         state submit/start at     queue                          jclass                         slots ja-task-ID 
+------------------------------------------------------------------------------------------------------------------------------------------------
+ 110147 0.00500 submitter. gcd34        r     10/16/2014 08:41:54 all.q@ac01n02.cm.cluster                                          1        
+```
+
+where the `r` lets us know the code is running. 
+
+You can check the file contents for any errors or things that would have normally been dumped to the standard output. Check the `output/` folder for the contents of the Qiime output being executed in `submitter.sh` 
 
 ```bash
 [gcd34@proteusi01 proteus-demo]$ ls -l output/

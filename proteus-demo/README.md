@@ -72,4 +72,7 @@ drwxr-xr-x 5 gcd34 rosenGrp 4096 Oct  8 14:19 wf_jack
 drwxr-xr-x 3 gcd34 rosenGrp 4096 Oct  8 14:19 wf_taxa_summary
 ```
 
+# Acknowledgements
+
+* Prof. Rosen provided a lot of great advice to get this tutorial to its current state. 
  

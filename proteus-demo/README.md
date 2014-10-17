@@ -28,6 +28,9 @@ This tutorial goes over how to use  Qiime  to process data from a high-throughpu
   mkdir output/
 ```
 
+*Be very careful with the `rm` command!* [Remember, once its gone, its gone! ](http://iconic-inc.com/wp-content/uploads/2013/08/il_570xN.347082039.jpg)
+
+
 You also need to setup your Qiime configuration (i.e., tell Qiime where otherr software and databases are located). So run
 ```bash 
   cp /mnt/HA/groups/nsftuesGrp/qiime_config ~/.qiime_config

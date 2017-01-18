@@ -34,7 +34,8 @@ This tutorial goes over how to use  Qiime  to process data from a high-throughpu
 You also need to setup your Qiime configuration (i.e., tell Qiime where otherr software and databases are located). So run
 ```module load qiime/gcc/64/1.9.1
 ```
-
+# Found an error about $DISPLAYs
+creating the file  ~/.config/matplotlib/matplotlibrc and putting "backend : agg" into that file seems to fix this
 
 # Submitting to the Proteus cluster
 

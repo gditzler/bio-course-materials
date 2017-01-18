@@ -41,7 +41,7 @@ You also need to setup your Qiime configuration (i.e., tell Qiime where otherr s
 You need to make sure you change from your group to the courses group before you submit your job to the queuing system. This is true for any job that you run. Once you have changed your group, run: 
 
 ```bash 
-  newgrp nsftuesGrp
+  newgrp rosenclassGrp
   qsub submitter.sh
 ```
 

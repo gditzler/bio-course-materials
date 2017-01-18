@@ -1,12 +1,12 @@
 #!/bin/bash
 #$ -S /bin/bash
 #$ -cwd
-#$ -M gcd34@drexel.edu
+#$ -M gailr@ece.drexel.edu
 #$ -l h_rt=00:45:00
-#$ -P nsftuesPrj
+#$ -P rosenclassPrj
 #$ -l h_vmem=8G
 #$ -l mem_free=6G
-#$ -q all.q@@amdhosts 
+#$ -q all.q 
 
 # boiler plate stuff here! set up the environment at we need to do our
 # computation
@@ -15,12 +15,14 @@ module load shared
 module load proteus
 module load sge/univa
 module load gcc/4.8.1
-module load qiime/gcc/64/1.8.0
+#module load qiime/gcc/64/1.8.0
+module load qiime/gcc/64/1.9.1
 
+python -c 'import matplotlib; print matplotlib.matplotlib_fname()'
 ###############################
 ## Change this path!!!!
-data_fp=/home/gcd34/bio-course-materials/proteus-demo/data/
-out_fp=/home/gcd34/bio-course-materials/proteus-demo/output/
+data_fp=/home/gailr/test/bio-course-materials/proteus-demo/data/
+out_fp=/home/gailr/test/bio-course-materials/proteus-demo/output/
 
 # 1) check out mapping file 
 validate_mapping_file.py -m ${data_fp}/Fasting_Map.txt -o ${TMP}/mapping_output/ -v
@@ -32,7 +34,7 @@ split_libraries.py -m ${data_fp}/Fasting_Map.txt -f ${data_fp}/Fasting_Example.f
 pick_de_novo_otus.py -i ${TMP}/split_library_output/seqs.fna -o ${TMP}/otus
 
 # 4) create a heat map of the OTU table 
-make_otu_heatmap_html.py -i ${TMP}/otus/otu_table.biom -o ${TMP}/otus/OTU_Heatmap/
+make_otu_heatmap.py -i ${TMP}/otus/otu_table.biom -o ${TMP}/otus/OTU_Heatmap/
 
 # 5) 
 make_otu_network.py -m ${data_fp}/Fasting_Map.txt -i ${TMP}/otus/otu_table.biom -o ${TMP}/otus/OTU_Network
@@ -55,9 +57,11 @@ make_bootstrapped_tree.py -m ${TMP}/wf_jack/unweighted_unifrac/upgma_cmp/master_
 
 # remember that we were writing to scratch space. we need to move the files 
 # back to our home folder. 
+mkdir -p ${out_fp}
 cp -R ${TMP}/mapping_output/ ${out_fp}/mapping_output/
 cp -R ${TMP}/split_library_output ${out_fp}/split_library_output/
 cp -R ${TMP}/otus ${out_fp}/otus
+#cp -R ${TMP}/compare_otus ${out_fp}/compare_otus
 cp -R ${TMP}/otus/OTU_Heatmap/ ${out_fp}/otus/OTU_Heatmap/
 cp -R ${TMP}/otus/OTU_Network ${out_fp}/otus/OTU_Network
 cp -R ${TMP}/wf_taxa_summary/ ${out_fp}/wf_taxa_summary/
@@ -66,5 +70,3 @@ cp -R ${TMP}/wf_arare ${out_fp}/wf_arare
 cp -R ${TMP}/wf_bdiv_even146/ ${out_fp}/wf_bdiv_even146/
 cp -R ${TMP}/wf_jack ${out_fp}/wf_jack
 cp ${TMP}/wf_jack/unweighted_unifrac/upgma_cmp/jackknife_named_nodes.pdf ${out_fp}/wf_jack/unweighted_unifrac/upgma_cmp/jackknife_named_nodes.pdf
-
-

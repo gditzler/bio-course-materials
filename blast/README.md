@@ -10,7 +10,7 @@ Command line Blast tutorial written by Yemin Lan (<yeminlan@gmail.com>).
 #!/usr/bin/env python 
 from Bio import SeqIO
 
-sequences = {s.id:s.seq for s in SeqIO.parse("myseqs.fna", "fasta")}
+sequences = {s.id:s.seq for s in SeqIO.parse("my_seqs.fna", "fasta")}
 
 for s_name in sequences.keys(): 
   print s_name + ": " + str(len(sequences[s_name])) + " bases"

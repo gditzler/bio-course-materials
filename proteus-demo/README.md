@@ -6,7 +6,7 @@ First, download the Git repo to you home folder on the login node of Proteus. Be
   # Assuming you have ssh'd into the head node and are in your
   # home folder. Run 'pwd' without the ticks. You should see
   # /home/<your user name>. Then run:
-  git clone https://github.com/gditzler/bio-course-materials.git
+  git clone https://github.com/EESI/bio-course-materials.git
   cd bio-course-materials/proteus-demo/
 ```
 
@@ -32,17 +32,17 @@ This tutorial goes over how to use  Qiime  to process data from a high-throughpu
 
 
 You also need to setup your Qiime configuration (i.e., tell Qiime where otherr software and databases are located). So run
-```bash 
-  cp /mnt/HA/groups/nsftuesGrp/qiime_config ~/.qiime_config
+```module load qiime/gcc/64/1.9.1
 ```
-
+# Found an error about $DISPLAYs
+creating the file  ~/.config/matplotlib/matplotlibrc and putting "backend : agg" into that file seems to fix this
 
 # Submitting to the Proteus cluster
 
 You need to make sure you change from your group to the courses group before you submit your job to the queuing system. This is true for any job that you run. Once you have changed your group, run: 
 
 ```bash 
-  newgrp nsftuesGrp
+  newgrp rosenclassGrp
   qsub submitter.sh
 ```
 
